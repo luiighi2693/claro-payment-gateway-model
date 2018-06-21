@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.e4gslab</groupId>
+	<artifactId>claro-payment-gateway-model</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<hibernate.version>4.3.10.Final</hibernate.version>
+	</properties>
+	<name>claro-payment-gateway-model</name>
+	
+	<profiles>
+		<profile>
+			<id>development</id>
+			<properties>
+				<javax.persistence.jdbc.url>jdbc:oracle:thin:@12.1.0.1:1521:XE</javax.persistence.jdbc.url>
+				<javax.persistence.jdbc.user>PAYMENT_GATEWAY</javax.persistence.jdbc.user>
+				<javax.persistence.jdbc.driver>oracle.jdbc.OracleDriver</javax.persistence.jdbc.driver>
+				<javax.persistence.jdbc.password>P4ym3nt$Gateway</javax.persistence.jdbc.password>	
+				<hibernate.show_sql>false</hibernate.show_sql>		
+			</properties>
+		</profile>
+
+		<profile>
+			<id>production-qa</id>
+			<properties>
+				<javax.persistence.jdbc.url>jdbc:oracle:thin:@66.50.204.83:17213/miclarodb</javax.persistence.jdbc.url>
+				<javax.persistence.jdbc.user>PAYMENT_GATEWAY_USER</javax.persistence.jdbc.user>
+				<javax.persistence.jdbc.driver>oracle.jdbc.OracleDriver</javax.persistence.jdbc.driver>
+				<javax.persistence.jdbc.password>usr_gtwy_pymnt_11</javax.persistence.jdbc.password>				
+				<hibernate.show_sql>false</hibernate.show_sql>				
+			</properties>
+		</profile>
+
+		<profile>
+			<id>production</id>
+			<properties>
+				<javax.persistence.jdbc.url>jdbc:oracle:thin:@10.13.27.178:17213/miclarodb</javax.persistence.jdbc.url>
+				<javax.persistence.jdbc.user>PAYMENT_GATEWAY_USER</javax.persistence.jdbc.user>
+				<javax.persistence.jdbc.driver>oracle.jdbc.OracleDriver</javax.persistence.jdbc.driver>
+				<javax.persistence.jdbc.password>usr_gtwy_pymnt_11</javax.persistence.jdbc.password>
+				<hibernate.show_sql>false</hibernate.show_sql>
+			</properties>
+		</profile>
+	</profiles>	
+	
+	<dependencies>
+	
+		<!-- ////////////////////////////////////// -->
+		<!-- JDBC-DRIVER -->
+		<!-- ////////////////////////////////////// -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc7</artifactId>
+			<version>12.1.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- ////////////////////////////////////// -->
+		<!-- HIBERNATE -->
+		<!-- ////////////////////////////////////// -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<!-- for JPA, use hibernate-entitymanager instead of hibernate-core -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-osgi</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-envers</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-proxool</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-infinispan</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-ehcache</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.3.2.Final</version>
+		</dependency>
+	</dependencies>	
+	
+	<build>
+		<resources>
+        	<resource>
+            	<directory>src/main/resources</directory>
+             	<filtering>true</filtering>
+        	</resource>
+    	</resources> 	
+    </build>
+	
+</project>
